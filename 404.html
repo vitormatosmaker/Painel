@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Painel Costurando Sucesso</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&amp;family=Figtree:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+/* Layout: menu lateral fixo + área de página; no celular o menu vira uma barra no topo com rolagem lateral.
+   Cor: indigo = perfil do Eduardo, linha vermelha (fio de costura) = perfil Costurando Sucesso. */
+:root{
+  --bg:#EDEFF5; --surface:#FFFFFF; --surface-2:#F5F6FB; --ink:#171C2E; --ink-2:#4B5370; --line:#DADEEA;
+  --edu:#3846A8; --edu-soft:#F3E7F9; --cos:#C73852; --cos-soft:#FBF3E8;
+  --s0:#8A91A8; --s1:#B7791F; --s2:#2F6FB3; --s3:#7A4FB5; --s4:#1E8A5A;
+  --focus:#3846A8;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1320; --surface:#171C2E; --surface-2:#1F2438; --ink:#E9ECF6; --ink-2:#A5ADC8; --line:#2C3352;
+    --edu:#93A0FF; --edu-soft:#262E5C; --cos:#FF7E93; --cos-soft:#43212C;
+    --s0:#7C849E; --s1:#E0A94A; --s2:#6FAEF0; --s3:#B590F0; --s4:#4CC48A; --focus:#93A0FF;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1320; --surface:#171C2E; --surface-2:#1F2438; --ink:#E9ECF6; --ink-2:#A5ADC8; --line:#2C3352;
+  --edu:#93A0FF; --edu-soft:#262E5C; --cos:#FF7E93; --cos-soft:#43212C;
+  --s0:#7C849E; --s1:#E0A94A; --s2:#6FAEF0; --s3:#B590F0; --s4:#4CC48A; --focus:#93A0FF;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.55;
+  padding-block:24px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--bg)}
+a{color:inherit}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--font-display);margin:0;text-wrap:balance;line-height:1.15;letter-spacing:-.01em}
+p{margin:0}
+.mono{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:252px minmax(0,1fr);gap:32px;align-items:start}
+
+/* menu lateral */
+.side{position:sticky;top:24px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{flex:none;color:var(--cos)}
+.brand b{font-family:var(--font-display);font-size:18px;line-height:1.1;display:block}
+.brand span{color:var(--ink-2);font-size:12px}
+.nav{display:flex;flex-direction:column;gap:2px;min-width:0}
+.nav .grp{margin:14px 0 6px;color:var(--ink-2)}
+.nav a{display:flex;align-items:center;justify-content:space-between;gap:8px;text-decoration:none;padding:9px 12px;border-radius:10px;color:var(--ink-2);font-weight:500;border:1px solid transparent}
+.nav a:hover{background:var(--surface);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--surface);color:var(--ink);border-color:var(--line);box-shadow:inset 3px 0 0 var(--accent,var(--ink))}
+.nav a.edu{--accent:var(--edu)} .nav a.cos{--accent:var(--cos)} .nav a.neu{--accent:var(--ink)}
+.badge{min-width:22px;height:22px;padding:0 7px;border-radius:99px;background:var(--cos);color:#fff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+:root[data-theme="dark"] .badge{color:#1b0f13}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .badge{color:#1b0f13}}
+.badge[hidden]{display:none}
+.sideprog{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.sideprog .bar{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.sideprog .bar i{display:block;height:100%;background:var(--s4);width:0;transition:width .3s}
+.sideprog small{color:var(--ink-2);font-size:12px}
+
+/* cabeçalho de página */
+.main{min-width:0;display:flex;flex-direction:column;gap:28px}
+.stitch{height:2px;width:100%;background:repeating-linear-gradient(90deg,var(--cos) 0 9px,transparent 9px 15px);opacity:.85}
+.phead{display:flex;flex-direction:column;gap:10px}
+.phead .eyebrow{color:var(--ink-2)}
+.phead h1{font-size:clamp(1.7rem,3.4vw,2.5rem)}
+.phead p{color:var(--ink-2);max-width:68ch;font-size:16px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--font-display);font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{color:var(--ink-2);font-size:13px}
+
+.sec{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sec>header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
+.sec h2{font-size:1.3rem}
+.sec>header p{color:var(--ink-2);font-size:14px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.pipe{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--surface-2);gap:2px}
+.pipe i{display:block;height:100%;min-width:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;color:var(--ink-2);font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;background:var(--s0)}
+.st0{--c:var(--s0)}.st1{--c:var(--s1)}.st2{--c:var(--s2)}.st3{--c:var(--s3)}.st4{--c:var(--s4)}
+.dot.c,.pipe i.c{background:var(--c)}
+
+.profiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:16px}
+.pcard{display:flex;flex-direction:column;gap:14px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;border-top:4px solid var(--accent)}
+.pcard.edu{--accent:var(--edu)}.pcard.cos{--accent:var(--cos)}
+.pcard h3{font-size:1.35rem}
+.pcard p{color:var(--ink-2)}
+.pcard .links{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface-2);font-size:13px;font-weight:500;text-decoration:none;color:var(--ink)}
+a.pill:hover,button.pill:hover{border-color:var(--accent,var(--ink))}
+.pcard:hover{border-color:var(--accent)}
+.pcard .go{color:var(--accent);font-weight:600;font-size:14px}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.chip{cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 14px;font-weight:500;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.matrix{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.col{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.col h3{font-size:1rem}
+.col .n{color:var(--ink-2)}
+.fchip{display:flex;align-items:center;gap:8px;width:100%;text-align:left;cursor:pointer;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:8px 10px;min-width:0}
+.fchip.edu{--accent:var(--edu)}.fchip.cos{--accent:var(--cos)}
+.fchip:hover{border-color:var(--accent)}
+.fchip b{font-family:var(--font-mono);font-weight:500;font-size:12px;color:var(--accent)}
+.fchip span.t{min-width:0;flex:1;overflow-wrap:anywhere;font-size:14px}
+.empty{color:var(--ink-2);font-size:13px}
+
+.note{display:flex;gap:14px;align-items:flex-start;background:var(--edu-soft);border-radius:12px;padding:16px 18px}
+.note.cos{background:var(--cos-soft)}
+.note svg{flex:none;margin-top:2px}
+.note p{max-width:75ch}
+.note .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
+/* cartões de formato */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0;border-top:4px solid var(--accent, var(--edu))}
+.card.edu{--accent:var(--edu)}.card.cos{--accent:var(--cos)}
+.card.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{box-shadow:0 0 0 4px var(--accent)}100%{box-shadow:0 0 0 4px transparent}}
+.card .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.code{font-family:var(--font-mono);font-size:12px;font-weight:500;padding:3px 9px;border-radius:6px;background:var(--surface-2);color:var(--accent);border:1px solid var(--line)}
+.goal{color:var(--ink-2)}
+.card h3{font-size:1.2rem}
+.lede{color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:500;padding:3px 10px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.tag.hl{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.kv{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.kv dt{color:var(--ink-2);font-family:var(--font-mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding-top:3px}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;position:relative;padding-bottom:12px}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:13px;top:28px;bottom:0;border-left:2px dashed var(--cos)}
+.steps li:last-child::before{display:none}
+.steps b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--cos);color:var(--surface);font-size:13px;font-weight:600}
+.steps span{padding-top:3px}
+.foot{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:4px}
+.stsel{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface-2);border-radius:99px;padding:3px 6px 3px 10px}
+.stsel select{appearance:none;-webkit-appearance:none;border:0;background:transparent;font-size:13px;font-weight:600;cursor:pointer;padding:3px 4px;color:var(--ink)}
+.stsel select option{color:#171C2E;background:#fff}
+
+/* referências e pendências */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--ink-2);padding:12px 16px;border-bottom:1px solid var(--line);font-weight:500}
+td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td .u{font-family:var(--font-mono);font-size:13px;overflow-wrap:anywhere}
+td .chips{display:flex;flex-wrap:wrap;gap:6px}
+.mini{cursor:pointer;border:1px solid var(--line);background:var(--surface-2);border-radius:6px;padding:2px 8px;font-family:var(--font-mono);font-size:12px;color:var(--accent)}
+.mini.edu{--accent:var(--edu)}.mini.cos{--accent:var(--cos)}
+.mini:hover{border-color:var(--accent)}
+.open{white-space:nowrap}
+.pend{display:flex;gap:14px;align-items:flex-start}
+.pend input{width:20px;height:20px;margin-top:3px;accent-color:var(--cos);flex:none;cursor:pointer}
+.pend h3{font-size:1.1rem}
+.pend.done h3{text-decoration:line-through;color:var(--ink-2)}
+.pend .body{display:flex;flex-direction:column;gap:10px;min-width:0}
+.pend .body p{color:var(--ink-2)}
+.list{display:flex;flex-direction:column;gap:12px}
+
+@media (max-width:900px){
+  .shell{display:block}
+  .side{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);flex-direction:row;align-items:center;gap:12px;padding-block:8px;margin-bottom:20px}
+  .brand span,.sideprog,.nav .grp{display:none}
+  .brand b{font-size:15px;white-space:nowrap}
+  .nav{flex-direction:row;overflow-x:auto;flex:1;padding-bottom:2px;scrollbar-width:thin}
+  .nav a{white-space:nowrap;flex:none;border:1px solid var(--line);background:var(--surface)}
+}
+@media (max-width:520px){.brand b{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card.flash{animation:none;box-shadow:0 0 0 3px var(--accent)}.sideprog .bar i{transition:none}}
+</style>
+
+<div class="shell">
+  <aside class="side">
+    <a class="brand" href="#visao-geral" aria-label="Ir para a visão geral">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><circle cx="17" cy="17" r="14" stroke="currentColor" stroke-width="2.5" stroke-dasharray="5 4"></circle><circle cx="17" cy="17" r="4" fill="currentColor"></circle></svg>
+      <div><b>Eduardo Cristian</b><span>Plano de conteúdo</span></div>
+    </a>
+    <nav class="nav" id="nav" aria-label="Páginas do painel"><span class="mono grp">Geral</span><a class="neu" href="#visao-geral" aria-current="page"><span>Visão geral</span></a><span class="mono grp">Eduardo Cristian</span><a class="edu" href="#eduardo-reels"><span>Feed</span></a><a class="edu" href="#eduardo-stories"><span>Stories</span></a><span class="mono grp">Costurando Sucesso</span><a class="cos" href="#costurando-feed"><span>Feed</span></a><a class="cos" href="#costurando-institucional"><span>Stories</span></a><span class="mono grp">Apoio</span><a class="neu" href="#referencias"><span>Referências</span></a><a class="neu" href="#em-aberto"><span>Em aberto</span><span class="badge" id="pbadge">3</span></a></nav>
+  </aside>
+  <main class="main" id="app" tabindex="-1"><header class="phead"><span class="mono eyebrow">Visão Geral</span><h1>Produção de conteúdo</h1><p>Formatos para executar na marca pessoal do Eduardo Cristian e a marca Costurando Sucesso.</p></header><div class="stitch" aria-hidden="true"></div><div class="stats"><div class="stat"><b>12</b><span>formatos de conteúdo</span></div><div class="stat"><b>2</b><span>marcas</span></div><div class="stat"><b>10</b><span>referências para consultar</span></div><div class="stat"><b>3</b><span>pontos em aberto</span></div></div><section class="sec"><header><h2>Perfis</h2><p>Clique para abrir os formatos de cada perfil.</p></header><div class="profiles"><a class="pcard edu" href="#eduardo-reels"><span class="mono" style="color:var(--ink-2)">Marca pessoal</span><h3>Eduardo Cristian</h3><p>Conteúdos serão voltados para alcance, posicionamento e conexão direta com o público.</p><div class="links"><span class="pill">6 formatos</span></div><span class="go">Abrir perfil →</span></a><a class="pcard cos" href="#costurando-feed"><span class="mono" style="color:var(--ink-2)">Marca da empresa</span><h3>Costurando Sucesso</h3><p>Conteúdos com uma base institucional, onde traremos a visão da empresa, porém com volume mais baixo de publicações.</p><div class="links"><span class="pill">6 formatos</span></div><span class="go">Abrir perfil →</span></a></div></section><section class="sec"><header><h2>Andamento</h2><p>Atualize o status dentro de cada formato.</p></header><div class="panel"><div class="pipe" role="img" aria-label="Distribuição de status dos formatos"><i class="c st0" style="flex:12" title="Ideia: 12"></i></div><div class="legend"><span class="st0"><i class="dot c"></i>Ideia <b>12</b></span><span class="st1"><i class="dot c"></i>Roteiro <b>0</b></span><span class="st2"><i class="dot c"></i>Gravado <b>0</b></span><span class="st3"><i class="dot c"></i>Editado <b>0</b></span><span class="st4"><i class="dot c"></i>Publicado <b>0</b></span></div></div></section><section class="sec"><header><h2>Formatos por objetivo</h2><div class="filters" role="group" aria-label="Filtrar por perfil"><button class="chip" data-filter-vis="all" aria-pressed="true">Todos</button><button class="chip" data-filter-vis="edu" aria-pressed="false">Eduardo</button><button class="chip" data-filter-vis="cos" aria-pressed="false">Costurando Sucesso</button></div></header><div class="matrix"><div class="col"><h3>Alcance</h3><span class="mono n">1 formato</span><button class="fchip edu" data-goto="e4"><b>F4</b><span class="t">Vídeo bruto com narrativa</span><i class="dot c st0" title="Ideia"></i></button></div><div class="col"><h3>Imagem de marca</h3><span class="mono n">4 formatos</span><button class="fchip edu" data-goto="e3"><b>F3</b><span class="t">Reels roteirizado</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c1"><b>F1</b><span class="t">Reels roteirizado</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c3"><b>F2</b><span class="t">Gravação de cortes (pós-reuniões)</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c6"><b>F4</b><span class="t">Dump de vídeos</span><i class="dot c st0" title="Ideia"></i></button></div><div class="col"><h3>Bastidores e rotina</h3><span class="mono n">4 formatos</span><button class="fchip edu" data-goto="e1"><b>F1</b><span class="t">Bastidores editados</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip edu" data-goto="e2"><b>F2</b><span class="t">Bastidores na horizontal</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip edu" data-goto="e5"><b>F1</b><span class="t">Stories: a vida real</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c5"><b>F3</b><span class="t">Dump de fotos</span><i class="dot c st0" title="Ideia"></i></button></div><div class="col"><h3>Relacionamento e base</h3><span class="mono n">3 formatos</span><button class="fchip edu" data-goto="e6"><b>F2</b><span class="t">Stories: caixinha de perguntas</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c2"><b>F1</b><span class="t">Stories promocionais</span><i class="dot c st0" title="Ideia"></i></button><button class="fchip cos" data-goto="c4"><b>F5</b><span class="t">Artes e carrosséis</span><i class="dot c st0" title="Ideia"></i></button></div></div></section><div class="note"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"></path></svg><div><p><b>Sem gravação na semana?</b> Os bastidores editados (F1 e F2) usam só material já gravado e formam um banco de conteúdo pronto para soltar a qualquer momento.</p><div class="pills"><button class="pill" data-goto="e1">Ver F1</button><button class="pill" data-goto="e2">Ver F2</button></div></div></div></main>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+var STATUS=["Ideia","Roteiro","Gravado","Editado","Publicado"];
+var GOALS=["Alcance","Imagem de marca","Bastidores e rotina","Relacionamento e base"];
+
+var F=[
+{id:"e1",p:"edu",code:"F1",page:"eduardo-reels",goal:"Bastidores e rotina",title:"Bastidores editados",
+ lede:"Vídeos mostrando os melhores momentos do dia postados de maneira mais rápida e, se possível, em tempo real.",
+ tags:["Vertical","Edição ágil"],
+ rows:[],
+ links:["https://www.instagram.com/reel/Dc1bLwJgfDH/?exln=N2Q0bzlicDNhcTRo"]},
+{id:"e2",p:"edu",code:"F2",page:"eduardo-reels",goal:"Bastidores e rotina",title:"Bastidores editados",
+ lede:"O mesmo formato anterior, porém feito na horizontal. Formato lançado recentemente pelo Instagram.",
+ tags:["Horizontal","Edição ágil"],
+ rows:[],
+ links:["https://www.instagram.com/reel/DfBJj7ntKOB/?utm_source=ig_web_copy_link&rpxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA=="]},
+{id:"e3",p:"edu",code:"F3",page:"eduardo-reels",goal:"Imagem de marca",title:"Reels roteirizado",
+ lede:"Conteúdos na vertical com mais pós-produção, serão roteirizados, cenários bonitos e elegantes, vamos usar inserts e materiais de apoio para que traga esse posicionamento forte do Eduardo.",
+ tags:["Roteirizado","Com inserts","Banco de conteúdo"],
+ rows:[],
+ links:["https://www.instagram.com/reel/DfCRrn0T2By/?psln=MWRuMWwweHIxcG1jbw==","https://www.instagram.com/reel/DektnhOqNsQ/?rpxt=ZGN5NXI5c3NucDhs"]},
+{id:"e4",p:"edu",code:"F4",page:"eduardo-reels",goal:"Alcance",title:"Vídeo bruto + narrativa",
+ lede:"Vídeos que serão muitas vezes brutos, trazendo sempre uma narrativa forte em texto, aparecendo na parte de cima e na parte de baixo. Essas narrativas precisam ser para uma audiência macro, que ainda não conhece e não segue o Eduardo.",
+ tags:["Banco de conteúdo","Vídeos antigos ou atuais"],
+ rows:[],
+ links:["https://www.instagram.com/reel/Dabj5Zkgz_2/?utm_source=ig_web_copy_link&rpxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==","https://www.instagram.com/reel/DcRmayzhQkZ/?psln=cmQ0Nnd0cHJ6b292","https://www.instagram.com/reel/Da8wk2EBEm2/?mdxt=MWlwbnNnZWJyeTZoOA=="]},
+{id:"e5",p:"edu",code:"F1",page:"eduardo-stories",goal:"Bastidores e rotina",title:"Vida real",
+ lede:"Documentar a vida do Eduardo: personalidade, pensamentos e o real acontecendo.",
+ tags:["Atualizações em tempo real"],
+ rows:[],pend:"p1",links:[]},
+{id:"e6",p:"edu",code:"F2",page:"eduardo-stories",goal:"Relacionamento e base",title:"Caixinha de pergunta",
+ lede:"Responder caixinhas de pergunta enquanto o real acontece.",
+ tags:["Caixinha de pergunta"],
+ rows:[],links:[]},
+
+{id:"c1",p:"cos",code:"F1",page:"costurando-feed",goal:"Imagem de marca",title:"Reels roteirizado",
+ lede:"Conteúdo roteirizado com muitos takes na empresa e algumas cabeças de fala.",
+ tags:["Roteirizado","Institucional"],
+ rows:[],links:["https://www.instagram.com/reel/DYScPHTRHH3/?xtok=MWpnMnB1MW5rZzJpZw==","https://www.instagram.com/reel/DYwjK2Fx6q_/?xtok=amNxNmEzZXd5MXg=","https://www.instagram.com/reel/DaDaLj2vcSu/?srtk=MWZxcTFnZTQ0cG1tbA=="]},
+{id:"c2",p:"cos",code:"F1",page:"costurando-institucional",goal:"Relacionamento e base",title:"Stories promocionais",
+ lede:"Avisos e divulgações e um vídeo ou outro dos bastidores da equipe.",
+ tags:["Baixo volume de publicações"],
+ rows:[],links:[]},
+{id:"c3",p:"cos",code:"F2",page:"costurando-feed",goal:"Imagem de marca",title:"Gravação de cortes (pós-reuniões)",
+ lede:"Usar os intervalos e o fim das reuniões para gravar o Eduardo, ou outro membro do time, dando uma aula curta. Esse tipo de conteúdo será ajustado para que vire um Reels.",
+ tags:["Ideia","Aula","Recorte"],
+ rows:[],
+ steps:[],
+ pend:"p2",links:["https://www.instagram.com/reel/Dbp_9ZbO4oO/?srtk=MTUzbTNkZzQzdzNxMQ==","https://www.instagram.com/reel/DUvFJbajscG/?srtk=NzZkd2pucjBlcXNz"]},
+{id:"c4",p:"cos",code:"F5",page:"costurando-feed",goal:"Relacionamento e base",title:"Artes e carrosséis",
+ lede:"Artes com histórias ou memes que façam sentido para a marca, e carrosséis com CTA no final.",
+ tags:["Design","Carrossel","CTA"],
+ rows:[],
+ links:["https://www.instagram.com/p/De-afP_GALs/?vrfl=MWoyam11ejY0a3RlYQ==","https://www.instagram.com/p/Dd6-L_tCS3Y/?psln=MTFjNGlsd2gybHhoYg=="]},
+{id:"c5",p:"cos",code:"F3",page:"costurando-feed",goal:"Bastidores e rotina",title:"Dump de fotos",
+ lede:"Carrossel com 6 a 7 fotos do escritório e da vida no escritório acontecendo.",
+ tags:["Carrossel","Fotos"],
+ rows:[],
+ links:["https://www.instagram.com/p/De919srG1ly/?img_index=4&mdxt=MTFyY2hlOHdpMm1odg==","https://www.instagram.com/p/DebwR3WlflB/?img_index=12&cplk=MXIxazY2eGs2ZDBvMw=="]},
+{id:"c6",p:"cos",code:"F4",page:"costurando-feed",goal:"Imagem de marca",title:"Dump de vídeos",
+ lede:"Vários vídeos curtos gravados no escritório, reunidos em uma mesma postagem.",
+ tags:["Carrossel","Vídeos curtos"],
+ rows:[],
+ links:["https://www.instagram.com/p/DWJkMUngIat/?utm_source=ig_web_copy_link&mdxt=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==","https://www.instagram.com/p/DXrfkcHDJAO/?img_index=5&srtk=bjBpNWxmMXR6NHQ1","https://www.instagram.com/p/DS7sziNDPyW/?img_index=9&cplk=MWt5aW9ybnQzZ3psMQ==","https://www.instagram.com/p/DZ9mFfBmGls/?img_index=6&obrf=MXRkOTB4dHFydWEweA==","https://www.instagram.com/reel/Da3Hz0exBvx/?utm_source=ig_web_copy_link&vrfl=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA=="]}
+];
+
+var P=[
+{id:"p1",title:"Filtros sobre o que não pode ser divulgado",
+ text:"Para documentar a vida do Eduardo nos stories, é preciso definir quais informações ficam de fora.",affects:["e5"]},
+{id:"p2",title:"Definir narrativas centrais e secundárias",
+ text:"Definir as narrativas centrais e secundárias da marca pessoal do Eduardo para orientar os vídeos do F4.",affects:["e4"]},
+{id:"p3",title:"Definir perguntas para gerar cortes",
+ text:"Deixar em aberto quais perguntas e dúvidas serão selecionadas para que cada corte seja desenvolvido a partir de uma pergunta.",affects:["c3"]}
+];
+
+var ROUTES={
+ "visao-geral":{nav:"Visão geral",cls:"neu",group:"Geral"},
+ "eduardo-reels":{nav:"Feed",cls:"edu",group:"Eduardo Cristian"},
+ "eduardo-stories":{nav:"Stories",cls:"edu"},
+ "costurando-feed":{nav:"Feed",cls:"cos",group:"Costurando Sucesso"},
+ "costurando-institucional":{nav:"Stories",cls:"cos"},
+ "referencias":{nav:"Referências",cls:"neu",group:"Apoio"},
+ "em-aberto":{nav:"Em aberto",cls:"neu",badge:true}
+};
+
+function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return {}}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var status=load("cs-status"), pend=load("cs-pend");
+var filterVis="all", filterRef="all", focusId=null;
+
+function byId(id){for(var i=0;i<F.length;i++)if(F[i].id===id)return F[i];}
+function st(id){var v=status[id];return (typeof v==="number"&&v>=0&&v<STATUS.length)?v:0;}
+function pName(p){return p==="edu"?"Eduardo Cristian":"Costurando Sucesso";}
+function shortUrl(u){try{var x=new URL(u);return x.hostname.replace("www.","")+x.pathname.replace(/\/$/,"");}catch(e){return u;}}
+function kind(u){return u.indexOf("/reel/")>-1?"Reel":"Post ou carrossel";}
+function uniqueLinks(){
+  var map={},order=[];
+  F.forEach(function(f){f.links.forEach(function(u){
+    if(!map[u]){map[u]={url:u,p:f.p,used:[]};order.push(u);}
+    map[u].used.push(f.id);
+  });});
+  return order.map(function(u){return map[u];});
+}
+function pendOpen(){return P.filter(function(x){return !pend[x.id];}).length;}
+
+var ICON={
+ spark:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg>',
+ flag:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg>'
+};
+
+function head(eyebrow,title,intro){
+  return '<header class="phead"><span class="mono eyebrow">'+eyebrow+'</span><h1>'+title+'</h1><p>'+intro+'</p></header><div class="stitch" aria-hidden="true"></div>';
+}
+
+function statusSel(f){
+  var s=st(f.id),o="";
+  STATUS.forEach(function(n,i){o+='<option value="'+i+'"'+(i===s?' selected':'')+'>'+n+'</option>';});
+  return '<label class="stsel st'+s+'"><span class="dot c" aria-hidden="true"></span><span class="mono" style="color:var(--ink-2)">Status</span><select data-status="'+f.id+'" aria-label="Status de '+f.title+'">'+o+'</select></label>';
+}
+
+function card(f){
+  var goalLabel=({e1:"Formato 1",e2:"Formato 2",e3:"Formato 3",e4:"Formato 4",e5:"Formato 1",e6:"Formato 2",c1:"Formato 1",c2:"Formato 1",c3:"Formato 2",c4:"Formato 5",c5:"Formato 3",c6:"Formato 4"})[f.id]||f.goal;
+  var tags=f.tags.map(function(t){return '<span class="tag'+(f.hl===t?' hl':'')+'">'+t+'</span>';}).join("");
+  var rows=f.rows.map(function(r){return '<dt>'+r[0]+'</dt><dd>'+r[1]+'</dd>';}).join("");
+  var steps=f.steps?('<ol class="steps" aria-label="Rotina semanal">'+f.steps.map(function(s,i){return '<li><b>'+(i+1)+'</b><span>'+s+'</span></li>';}).join("")+'</ol>'):"";
+  var foot="";
+  f.links.forEach(function(u,i){foot+='<a class="pill" href="'+u+'" target="_blank" rel="noopener noreferrer">Referência '+(i+1)+' ↗</a>';});
+  if(f.pend)foot+='<a class="pill" href="#em-aberto">Ponto em aberto →</a>';
+  return '<article class="card '+f.p+'" id="f-'+f.id+'">'+
+    '<div class="top"><div style="display:flex;align-items:center;gap:10px;min-width:0"><span class="code">'+f.code+'</span><span class="mono goal">'+goalLabel+'</span></div>'+('')+'</div>'+
+    '<h3>'+f.title+'</h3><p class="lede">'+f.lede+'</p><div class="tags">'+tags+'</div>'+steps+
+    '<dl class="kv">'+rows+'</dl>'+(foot?'<div class="foot">'+foot+'</div>':'')+'</article>';
+}
+
+function cardsFor(ids){return '<div class="cards">'+ids.map(function(i){return card(byId(i));}).join("")+'</div>';}
+function section(h,note,ids){
+  return '<section class="sec"><header><h2>'+h+'</h2>'+(note?'<p>'+note+'</p>':'')+'</header>'+cardsFor(ids)+'</section>';
+}
+
+/* páginas */
+function pgOverview(){
+  var nEdu=F.filter(function(f){return f.p==="edu";}).length, nCos=F.length-nEdu;
+  var refs=uniqueLinks().length;
+
+  return head("Visão Geral","Produção de conteúdo","Formatos para executar na marca pessoal do Eduardo Cristian e a marca Costurando Sucesso.")+
+  '<div class="stats">'+
+    '<div class="stat"><b>'+F.length+'</b><span>formatos de conteúdo</span></div>'+
+    '<div class="stat"><b>2</b><span>marcas</span></div>'+
+    '<div class="stat"><b>'+refs+'</b><span>referências para consultar</span></div>'+
+    '<div class="stat"><b>'+pendOpen()+'</b><span>pontos em aberto</span></div>'+
+  '</div>'+
+  '<section class="sec"><header><h2>Perfis</h2><p>Clique para abrir os formatos de cada perfil.</p></header><div class="profiles">'+
+    '<a class="pcard edu" href="#eduardo-reels"><span class="mono" style="color:var(--ink-2)">Marca pessoal</span><h3>Eduardo Cristian</h3><p>Conteúdos serão voltados para alcance, posicionamento e conexão direta com o público.</p><div class="links"><span class="pill">'+nEdu+' formatos</span></div><span class="go">Abrir perfil →</span></a>'+
+    '<a class="pcard cos" href="#costurando-feed"><span class="mono" style="color:var(--ink-2)">Marca da empresa</span><h3>Costurando Sucesso</h3><p>Conteúdos com uma base institucional, onde traremos a visão da empresa, porém com volume mais baixo de publicações.</p><div class="links"><span class="pill">'+nCos+' formatos</span></div><span class="go">Abrir perfil →</span></a>'+
+  '</div></section>';
+}
+
+function pgReels(){
+  return head("Eduardo Cristian · Feed","Formatos para feed","Separamos quatro formatos de conteúdo para feed, do mais rápido ao mais produzido, com objetivos diferentes: alcance, posicionamento e conexão com o público.")+ 
+  cardsFor(["e1","e2"])+
+  cardsFor(["e3","e4"])+
+  '<div class="note" style="margin-top:22px">'+ICON.spark+'<p>Estes dois formatos, F3 e F4, podem ser feitos em períodos sem gravação, usando só materiais já gravados, para criar um banco de conteúdos pronto para soltar a qualquer momento.</p></div>';
+}
+function pgStories(){
+  return head("Eduardo Cristian · Stories","Formatos para stories","O objetivo é mostrar a vida real e a personalidade do Eduardo no dia a dia. Criar uma novelinha onde vamos engajar o público a interagir com constância no perfil do Eduardo.")+
+  '<div class="note cos">'+ICON.flag+'<div><p><b>Antes de gravar:</b> é preciso definir os filtros sobre as informações que não podem ser divulgadas.</p><div class="pills"><a class="pill" href="#em-aberto">Ver ponto em aberto →</a></div></div></div>'+
+  cardsFor(["e5","e6"]);
+}
+function pgInst(){
+  return head("Costurando Sucesso · Stories","Formato para Stories","Conteúdo que apresenta a empresa e a ideia das mini-aulas gravadas na rotina de reuniões. Aqui o foco é a imagem da marca, não as views.")+
+  section("Institucional","",["c2"]);
+}
+function pgFeed(){
+  return head("Costurando Sucesso · Feed","Formatos para Feed","Com base no que foi definido previamente pelo Eduardo, os conteúdos da Costurando Sucesso serão, a maior parte, formatos institucionais.")+  cardsFor(["c1","c3","c5","c6"])+  section("Design","",["c4"]);
+}
+function pgRefs(){
+  function refsFor(profile,page){
+    var items=[];
+    F.forEach(function(f){
+      if(f.p!==profile || f.page!==page) return;
+      f.links.forEach(function(url,i){
+        items.push('<tr><td><span class="mono" style="color:var(--ink-2)">'+kind(url)+'</span><div class="u">'+shortUrl(url)+'</div></td><td><button class="mini '+f.p+'" data-goto="'+f.id+'">'+f.code+'</button> · '+f.title+(f.links.length>1?' · Referência '+(i+1):'')+'</td><td class="open"><a class="pill" href="'+url+'" target="_blank" rel="noopener noreferrer">Abrir ↗</a></td></tr>');
+      });
+    });
+    if(!items.length) return '<p class="empty">Ainda não há links cadastrados para esta categoria.</p>';
+    return '<div class="tablewrap"><table><thead><tr><th>Link de referência</th><th>Formato utilizado</th><th></th></tr></thead><tbody>'+items.join('')+'</tbody></table></div>';
+  }
+  return head("Apoio · Referências","Referências","Links organizados por marca, separados entre Feed e Stories e identificados pelo formato em que são usados.")+ 
+    '<section class="sec"><header><h2>Eduardo Cristian</h2></header>'+ 
+      '<section class="sec"><header><h3>Feed</h3></header>'+refsFor("edu","eduardo-reels")+'</section>'+ 
+      '<section class="sec"><header><h3>Stories</h3></header>'+refsFor("edu","eduardo-stories")+'</section>'+ 
+    '</section>'+ 
+    '<section class="sec"><header><h2>Costurando Sucesso</h2></header>'+ 
+      '<section class="sec"><header><h3>Feed</h3></header>'+refsFor("cos","costurando-feed")+'</section>'+ 
+      '<section class="sec"><header><h3>Stories</h3></header>'+refsFor("cos","costurando-institucional")+'</section>'+ 
+    '</section>';
+}
+function pgOpen(){
+  var items=P.map(function(x){
+    var chips=x.affects.map(function(id){var f=byId(id);return '<button class="mini '+f.p+'" data-goto="'+id+'">'+f.code+' · '+f.title+'</button>';}).join("");
+    var d=!!pend[x.id];
+    return '<div class="panel pend'+(d?' done':'')+'"><input type="checkbox" id="chk-'+x.id+'" data-pend="'+x.id+'"'+(d?' checked':'')+' aria-label="Marcar como resolvido"><div class="body"><h3><label for="chk-'+x.id+'" style="cursor:pointer">'+x.title+'</label></h3><p>'+x.text+'</p><div class="tags"><span class="mono" style="color:var(--ink-2);align-self:center">Afeta</span>'+chips+'</div></div></div>';
+  }).join("");
+  return head("Apoio · Em aberto","O que falta definir","Pontos que ainda precisam ser definidos para os formatos de conteúdo. Marque cada item como resolvido quando estiver decidido.")+
+  '<div class="list">'+items+'</div>';
+}
+
+var PAGES={"visao-geral":pgOverview,"eduardo-reels":pgReels,"eduardo-stories":pgStories,"costurando-institucional":pgInst,"costurando-feed":pgFeed,"referencias":pgRefs,"em-aberto":pgOpen};
+
+/* menu */
+function buildNav(cur){
+  var h="",lastGroup="";
+  Object.keys(ROUTES).forEach(function(k){
+    var r=ROUTES[k];
+    if(r.group&&r.group!==lastGroup){h+='<span class="mono grp">'+r.group+'</span>';lastGroup=r.group;}
+    h+='<a class="'+r.cls+'" href="#'+k+'"'+(k===cur?' aria-current="page"':'')+'><span>'+r.nav+'</span>'+(r.badge?'<span class="badge" id="pbadge"'+(pendOpen()?'':' hidden')+'>'+pendOpen()+'</span>':'')+'</a>';
+  });
+  document.getElementById("nav").innerHTML=h;
+}
+function updateProgress(){
+  var n=F.filter(function(f){return st(f.id)===4;}).length;
+  var txt=document.getElementById("progtxt"),bar=document.getElementById("progbar");
+  if(txt)txt.textContent=n+" de "+F.length;
+  if(bar)bar.style.width=(n/F.length*100)+"%";
+}
+function updateBadge(){
+  var b=document.getElementById("pbadge");if(!b)return;
+  var n=pendOpen();b.textContent=n;b.hidden=!n;
+}
+
+var app=document.getElementById("app");
+function current(){var h=location.hash.replace("#","");return PAGES[h]?h:"visao-geral";}
+function render(keepScroll){
+  var cur=current(),y=window.scrollY;
+  app.innerHTML=PAGES[cur]();
+  buildNav(cur);updateProgress();
+  document.title="Painel Costurando Sucesso";
+  if(focusId){
+    var el=document.getElementById("f-"+focusId);
+    if(el){el.scrollIntoView({block:"center"});el.classList.add("flash");}
+    focusId=null;
+  }else if(keepScroll){window.scrollTo(0,y);}
+  else{window.scrollTo(0,0);}
+}
+function goto(id){
+  var f=byId(id);if(!f)return;
+  focusId=id;
+  if(current()===f.page){render(true);}else{location.hash=f.page;}
+}
+
+window.addEventListener("hashchange",function(){render(false);});
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-goto],[data-filter-vis],[data-filter-ref]");
+  if(!t)return;
+  if(t.hasAttribute("data-goto")){goto(t.getAttribute("data-goto"));}
+  else if(t.hasAttribute("data-filter-vis")){filterVis=t.getAttribute("data-filter-vis");render(true);}
+  else{filterRef=t.getAttribute("data-filter-ref");render(true);}
+});
+document.addEventListener("change",function(e){
+  var s=e.target.closest("[data-status]");
+  if(s){
+    var id=s.getAttribute("data-status"),v=parseInt(s.value,10);
+    status[id]=v;save("cs-status",status);
+    var lab=s.closest(".stsel");lab.className="stsel st"+v;
+    updateProgress();return;
+  }
+  var c=e.target.closest("[data-pend]");
+  if(c){
+    pend[c.getAttribute("data-pend")]=c.checked;save("cs-pend",pend);
+    c.closest(".pend").classList.toggle("done",c.checked);
+    updateBadge();
+  }
+});
+
+render(false);
+})();
+</script>
+
+</body></html>
